@@ -23,7 +23,6 @@ const PullObjectSchema = new mongoose.Schema({
   },
   element: {
     /* Element (for figure only) */
-
     type: String
   },
   wp_type: {
@@ -39,8 +38,6 @@ const PullObjectSchema = new mongoose.Schema({
   },
   image_url: {
     /* Url to pet image */
-
-    required: [true, 'Please provide an image url for this.'],
     type: String,
   },
 })

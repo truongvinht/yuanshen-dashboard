@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import dbConnect from '../../lib/dbConnect'
+import dbConnect from '../../../lib/dbConnect'
 import PullObject from '../../../models/PullObject'
 
 /* Allows you to view pet card info and delete pet card*/
@@ -12,7 +12,7 @@ const PullObjectPage = ({ obj }) => {
     const objID = router.query.id
 
     try {
-      await fetch(`../api/objects/${objID}`, {
+      await fetch(`/api/objects/${objID}`, {
         method: 'Delete',
       })
       router.push('/')
@@ -31,7 +31,7 @@ const PullObjectPage = ({ obj }) => {
           <p className="owner">Element: {obj.element}</p>
 
           <div className="btn-container">
-            <Link href="/object/[id]/edit" as={`/object/${obj._id}/edit`}>
+            <Link href="/objects/[id]/edit" as={`/objects/${obj._id}/edit`}>
               <button className="btn edit">Edit</button>
             </Link>
             <button className="btn delete" onClick={handleDelete}>

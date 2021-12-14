@@ -22,6 +22,7 @@ export default async function handler(req, res) {
         ) /* create a new model in the database */
         res.status(201).json({ success: true, data: obj })
       } catch (error) {
+        console.log(error);
         res.status(400).json({ success: false })
       }
       break

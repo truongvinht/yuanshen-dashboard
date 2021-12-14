@@ -180,7 +180,6 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
           name="image_url"
           value={objForm.image_url}
           onChange={handleChange}
-          required
         />
 
         <button type="submit" className="btn">
