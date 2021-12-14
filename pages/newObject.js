@@ -3,7 +3,7 @@ import ObjectForm from '../components/ObjectForm'
 const NewObject = () => {
   const objectForm = {
     name: '',
-    type: '',
+    type: 'Figur',
     rating: 3,
     element: '',
     wp_type: '',

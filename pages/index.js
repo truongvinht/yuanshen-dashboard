@@ -7,7 +7,7 @@ const Index = ({ pullObjects }) => (
     {/* Create a card for each pet */}
     {pullObjects.map((obj) => (
       <div key={obj._id}>
-        <div className="card">
+        <div className={"card " + (obj.rating === 5 ? 'card-gold' : (obj.rating === 4 ? 'card-purple' : ''))}>
           <img src={obj.image_url} />
           <h5 className="pet-name">{obj.name}</h5>
           <div className="main-content">

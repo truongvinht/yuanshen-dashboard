@@ -17,9 +17,6 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     image_url: objectForm.image_url
   })
 
-  const [element, setElement] = useState('');
-  const [type, setType] = useState('');
-
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (objForm) => {
     const { id } = router.query
@@ -65,7 +62,9 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
         throw new Error(res.status)
       }
 
-      router.push('/')
+      // create next one
+      router.push('/newObject')
+      setMessage(`${objForm.name} created!`)
     } catch (error) {
       setMessage('Failed to add object')
     }
