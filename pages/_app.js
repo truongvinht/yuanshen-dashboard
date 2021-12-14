@@ -15,8 +15,11 @@ function MyApp({ Component, pageProps }) {
           <Link href="/">
             <a>Home</a>
           </Link>
+          <Link href="/objects">
+            <a>Objekte</a>
+          </Link>
           <Link href="/newObject">
-            <a>Add Object</a>
+            <a>Neuer Eintrag</a>
           </Link>
         </div>
 
