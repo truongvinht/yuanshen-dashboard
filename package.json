@@ -1,0 +1,18 @@
+{
+  "name": "yuanshen-dashboard",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev-alt": "next dev -p 3450",
+    "build": "next build",
+    "export": "next build && next export",
+    "start": "next start"
+  },
+  "dependencies": {
+    "mongoose": "^6.0.11",
+    "next": "9.3.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "swr": "^1.0.1"
+  }
+}
