@@ -28,6 +28,13 @@ const PullSchema = new mongoose.Schema({
     required: [true, 'Please provide banner name for this pull.'],
     maxlength: [256, 'Name cannot be more than 256 characters'],
   },
+  uid: {
+    /* user id */
+
+    type: Number,
+    required: [true, 'Please provide player uid for this pull.'],
+
+  }
 })
 
 export default mongoose.models.Pull || mongoose.model('Pull', PullSchema)

@@ -39,7 +39,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
       const { data } = await res.json()
 
       mutate(`/api/objects/${id}`, data, false) // Update the local data without a revalidation
-      router.push('/')
+      router.push('/objects')
     } catch (error) {
       setMessage('Failed to update object')
     }

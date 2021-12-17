@@ -7,7 +7,7 @@ const pullObjects = ({ pullObjects }) => (
     {/* Create a card for each pet */}
     {pullObjects.map((obj) => (
       <div key={obj._id}>
-        <div className={"card " + (obj.rating === 5 ? 'card-gold' : (obj.rating === 4 ? 'card-purple' : ''))}>
+        <div className={"card " + (obj.type === 'Waffe' ? (obj.rating === 5 ? 'card_bg_weapon_5_star ':(obj.rating === 4 ? 'card_bg_weapon_4_star ':'card_bg_weapon_3_star ')):'') + (obj.rating === 5 ? 'card-gold' : (obj.rating === 4 ? 'card-purple' : ''))}>
           <img src={obj.image_url} />
           <h5 className="pet-name">{obj.name}</h5>
           <div className="main-content">

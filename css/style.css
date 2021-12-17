@@ -63,6 +63,24 @@
   border-color: purple;
 }
 
+.card_bg_weapon_5_star {
+  background-image: url("https://static.wikia.nocookie.net/gensin-impact/images/7/76/Background_Item_5_Star.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.card_bg_weapon_4_star {
+  background-image: url("https://static.wikia.nocookie.net/gensin-impact/images/e/ec/Background_Item_4_Star.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.card_bg_weapon_3_star {
+  background-image: url("https://static.wikia.nocookie.net/gensin-impact/images/2/20/Background_Item_3_Star.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 .card:hover {
   --shadow: rgba(53, 53, 53, 0.103);
   /* transform: rotateY(180deg) translate(20px, 20px);
