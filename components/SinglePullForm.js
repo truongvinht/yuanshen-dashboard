@@ -10,8 +10,8 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
 
   const [pullForm, setPullForm] = useState({
     banner: pForm.banner,
-    pull: pForm.pull,
-    time: pForm.time,
+    object_ref: pForm.object_ref,
+    eventTime: pForm.time,
     uid: pForm.uid
   })
 
@@ -62,7 +62,7 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
 
       // create next one
       router.push('/newSinglePull')
-      setMessage(`${pullForm.pull} created!`)
+      setMessage(`Entry for ${pullForm.banner} created!`)
     } catch (error) {
       setMessage('Failed to add object')
     }
@@ -92,7 +92,7 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
   const formValidate = () => {
     let err = {}
     if (!pullForm.banner) err.banner = 'Banner is required'
-    if (!pullForm.pull) err.pull = 'Pull is required'
+    if (!pullForm.object_ref) err.pull = 'Pull is required'
     if (!pullForm.time) err.time = 'Time is required'
     return err
   }
@@ -115,23 +115,23 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
         </select>
 
 
-        <label htmlFor="pull">Ziehung</label>
+        <label htmlFor="object_ref">Ziehung</label>
         <select
-            name="pull"
-            value={pullForm.pull}
+            name="object_ref"
+            value={pullForm.object_ref}
             onChange={handleChange}
         >
             <option value=""></option>
             {pullObjects.map((obj) => (
-                <option value={obj._id}>{obj.name}</option>
+                <option key={obj._id} value={obj._id}>{obj.name}</option>
             ))}
         </select>
 
-        <label htmlFor="time">Zeit</label>
+        <label htmlFor="eventTime">Zeit</label>
         <input
           type="datetime"
-          name="time"
-          value={pullForm.time}
+          name="eventTime"
+          value={pullForm.eventTime}
           onChange={handleChange}
           required
         />

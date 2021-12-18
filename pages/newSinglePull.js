@@ -6,15 +6,13 @@ import SinglePullForm from '../components/SinglePullForm'
 const NewSinglePull = ({ pullObjects }) => {
     const singlePullForm = {
         banner: '',
-        pull: '',
+        object_ref: '',
         time: new Date().toLocaleString() + "",
         uid: ''
     }
 
     return <SinglePullForm formId="add-pull-form" pullObjects={pullObjects} pForm={singlePullForm} />
 }
-
-
 
 export async function getServerSideProps() {
     await dbConnect()

@@ -12,7 +12,7 @@ const PullSchema = new mongoose.Schema({
   object_ref: {
     /* The object reference id */
 
-    type: Number,
+    type: String,
     required: [true, "Please provide reference id."]
   },
   order_index: {
