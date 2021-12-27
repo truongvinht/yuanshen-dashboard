@@ -6,7 +6,7 @@ const ObjectCard = ({obj}) => {
         <div key={obj._id}>
         <div className={objCardStyles.card + ' ' + (obj.type === 'Waffe' ? (obj.rating === 5 ? objCardStyles.card_bg_weapon_5_star +' ':(obj.rating === 4 ? objCardStyles.card_bg_weapon_4_star +' ':objCardStyles.card_bg_weapon_3_star +' ')):'') + (obj.rating === 5 ? objCardStyles.card_gold : (obj.rating === 4 ? objCardStyles.card_purple : ''))}>
           <img src={obj.image_url} />
-          <h5 className={objCardStyles.card_name}>{obj.name}</h5>
+          <h6 className={objCardStyles.card_name}>{obj.name}</h6>
           <div className={objCardStyles.main_content}>
             <p className={objCardStyles.card_name}>{obj.name}</p>
             <p className={objCardStyles.element}>Element: {obj.element}</p>

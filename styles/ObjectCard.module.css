@@ -89,15 +89,15 @@
 
 .element {
   color: grey;
-  font-size: 110%;
+  font-size: 100%;
 }
 
 .card_name {
   font-weight: bold;
-  font-size: 130%;
+  font-size: 100%;
 }
 
-h5.card_name {
+h6.card_name {
   color: white;
   position: absolute;
   left: 0;
@@ -129,6 +129,7 @@ h5.card_name {
 
 .label {
   font-weight: bold;
+  font-size: 80%;
 }
 
 .btn_container {
