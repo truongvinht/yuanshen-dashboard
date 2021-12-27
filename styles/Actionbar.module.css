@@ -1,0 +1,40 @@
+.btn_container {
+    text-align: center;
+    top: 10px;
+  }
+  
+  .btn {
+    --accent: grey;
+    cursor: pointer;
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 90%;
+    letter-spacing: 1px;
+    transition: 0.5s all;
+    outline: none;
+  }
+  
+  .btn:hover {
+    background: var(--accent);
+    color: white;
+  }
+  
+  .edit.btn {
+    --accent: green;
+  }
+  
+  .delete.btn {
+    --accent: red;
+    margin-left: 10px;
+  }
+  
+  .view.btn {
+    --accent: blue;
+    margin-left: 10px;
+  }
+  .classic.btn {
+    --accent: black;
+  }

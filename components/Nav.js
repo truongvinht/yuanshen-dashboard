@@ -12,7 +12,7 @@ const Nav = () => {
                     <Link href='/objects'><a>Objekte</a></Link>
                 </li>
                 <li>
-                    <Link href='/newObject'><a>Neuer Eintrag</a></Link>
+                    <Link href='/locations'><a>Region</a></Link>
                 </li>
             </ul>
         </nav>

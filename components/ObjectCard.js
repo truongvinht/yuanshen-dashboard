@@ -29,11 +29,11 @@ const ObjectCard = ({obj}) => {
               <Link href="/objects/[id]/edit" as={`/objects/${obj._id}/edit`}>
                 <button className=
                 {[objCardStyles.btn, objCardStyles.edit].join(' ')}
-                >Edit</button>
+                >Ändern</button>
               </Link>
               <Link href="/objects/[id]" as={`/objects/${obj._id}`}>
                 <button className=
-                {[objCardStyles.btn, objCardStyles.view].join(' ')}>View</button>
+                {[objCardStyles.btn, objCardStyles.view].join(' ')}>Ansicht</button>
               </Link>
             </div>
           </div>

@@ -17,7 +17,7 @@ const Index = ({pulls}) => {
       <Head>
         <title>Yuanshen-Dashboard</title>
       </Head>
-      <h1>übersicht der Ziehungen:</h1>
+      <h1>Überblick der Ziehungen:</h1>
       <div className="ag-theme-alpine" style={{height: 400, width: 800}}>
           <AgGridReact
               rowData={pulls}>
