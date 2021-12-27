@@ -1,45 +1,17 @@
-import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
 import PullObject from '../models/PullObject'
+import ObjectCard from '../components/ObjectCard'
+import objCardStyles from '../styles/ObjectCard.module.css'
+
 
 const pullObjects = ({ pullObjects }) => (
     <>
     {/* Create a card for each pet */}
+    <div className={objCardStyles.grid}>
     {pullObjects.map((obj) => (
-      <div key={obj._id}>
-        <div className={"card " + (obj.type === 'Waffe' ? (obj.rating === 5 ? 'card_bg_weapon_5_star ':(obj.rating === 4 ? 'card_bg_weapon_4_star ':'card_bg_weapon_3_star ')):'') + (obj.rating === 5 ? 'card-gold' : (obj.rating === 4 ? 'card-purple' : ''))}>
-          <img src={obj.image_url} />
-          <h5 className="pet-name">{obj.name}</h5>
-          <div className="main-content">
-            <p className="pet-name">{obj.name}</p>
-            <p className="owner">Element: {obj.element}</p>
-
-            {/* Extra Pet Info: Likes and Dislikes */}
-            <div className="likes info">
-              <p className="label">Likes</p>
-              <ul>
-                <li>TEST </li>
-              </ul>
-            </div>
-            <div className="dislikes info">
-              <p className="label">Dislikes</p>
-              <ul>
-                <li>TEST </li>
-              </ul>
-            </div>
-
-            <div className="btn-container">
-              <Link href="/objects/[id]/edit" as={`/objects/${obj._id}/edit`}>
-                <button className="btn edit">Edit</button>
-              </Link>
-              <Link href="/objects/[id]" as={`/objects/${obj._id}`}>
-                <button className="btn view">View</button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ObjectCard obj={obj} /> 
     ))}
+    </div>
   </>
 )
 

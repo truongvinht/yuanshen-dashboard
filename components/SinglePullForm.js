@@ -11,7 +11,7 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
   const [pullForm, setPullForm] = useState({
     banner: pForm.banner,
     object_ref: pForm.object_ref,
-    eventTime: pForm.time,
+    eventTime: pForm.eventTime,
     uid: pForm.uid
   })
 
@@ -85,6 +85,7 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
         forNewPull ? postData(pullForm) : putData(pullForm)
     } else {
       setErrors({ errs })
+      console.log(errs)
     }
   }
 
@@ -93,7 +94,7 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
     let err = {}
     if (!pullForm.banner) err.banner = 'Banner is required'
     if (!pullForm.object_ref) err.pull = 'Pull is required'
-    if (!pullForm.time) err.time = 'Time is required'
+    if (!pullForm.eventTime) err.eventTime = 'Time is required'
     return err
   }
 
@@ -129,7 +130,7 @@ const SinglePullForm = ({ formId, pForm, pullObjects, forNewPull = true }) => {
 
         <label htmlFor="eventTime">Zeit</label>
         <input
-          type="datetime"
+          type="datetime-local"
           name="eventTime"
           value={pullForm.eventTime}
           onChange={handleChange}

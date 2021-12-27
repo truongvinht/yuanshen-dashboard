@@ -1,5 +1,6 @@
 {
   "name": "yuanshen-dashboard",
+  "entry_file": "pages/index.js",
   "private": true,
   "scripts": {
     "dev": "next dev",

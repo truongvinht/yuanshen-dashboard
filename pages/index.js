@@ -2,10 +2,8 @@ import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import dbConnect from '../lib/dbConnect'
 import Pull from '../models/Pull'
 import PullObject from '../models/PullObject'
+import Head from 'next/head'
 
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import pullObjects from './objects';
 
 const Index = ({pulls}) => {
   const rowData = [
@@ -15,6 +13,11 @@ const Index = ({pulls}) => {
   ];
 
   return (
+    <div>
+      <Head>
+        <title>Yuanshen-Dashboard</title>
+      </Head>
+      <h1>übersicht der Ziehungen:</h1>
       <div className="ag-theme-alpine" style={{height: 400, width: 800}}>
           <AgGridReact
               rowData={pulls}>
@@ -24,6 +27,7 @@ const Index = ({pulls}) => {
               <AgGridColumn field="index"></AgGridColumn>
           </AgGridReact>
       </div>
+    </div>
   );
 };
 

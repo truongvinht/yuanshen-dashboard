@@ -1,36 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-* {
+.card * {
   font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
-}
-
-/* Nav Area */
-.top-bar {
-  width: 100%;
-  margin-top: 0;
-  position: relative;
-  height: 80px;
-  text-align: right;
-}
-#title {
-  position: absolute;
-  left: 20px;
-  top: 0;
-  display: inline-block;
-  height: 100%;
-}
-.nav {
-  height: 100%;
-  display: inline-block;
-}
-.nav a {
-  margin: 0 20px;
-  font-size: 120%;
-  height: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .grid {
@@ -55,11 +27,11 @@
   font-size: 100%;
 }
 
-.card-gold {
+.card_gold {
   border-color: gold;
 }
 
-.card-purple {
+.card_purple {
   border-color: purple;
 }
 
@@ -87,7 +59,7 @@
   background: pink; */
 }
 
-.card:hover .main-content {
+.card:hover div {
   pointer-events: initial;
   opacity: 1;
 }
@@ -102,7 +74,7 @@
   object-fit: cover;
 }
 
-.main-content {
+.main_content {
   padding: 25px;
   position: absolute;
   top: 0;
@@ -115,17 +87,17 @@
   transition: 0.5s all;
 }
 
-.owner {
+.element {
   color: grey;
   font-size: 110%;
 }
 
-.pet-name {
+.card_name {
   font-weight: bold;
   font-size: 130%;
 }
 
-h5.pet-name {
+h5.card_name {
   color: white;
   position: absolute;
   left: 0;
@@ -140,7 +112,7 @@ h5.pet-name {
   border-radius: 7px;
 }
 
-li {
+.info li {
   list-style-type: none;
   margin: 0;
 }
@@ -159,7 +131,7 @@ li {
   font-weight: bold;
 }
 
-.btn-container {
+.btn_container {
   text-align: right;
   padding: 10px;
   position: absolute;

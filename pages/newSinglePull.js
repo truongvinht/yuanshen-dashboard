@@ -7,7 +7,7 @@ const NewSinglePull = ({ pullObjects }) => {
     const singlePullForm = {
         banner: '',
         object_ref: '',
-        time: new Date().toLocaleString() + "",
+        eventTime: new Date(),
         uid: ''
     }
 
