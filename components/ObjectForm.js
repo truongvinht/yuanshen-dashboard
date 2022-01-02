@@ -102,9 +102,10 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
 
   return (
     <>
-      <form id={formId} onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
+      <form class="w-full max-w-lg" id={formId} onSubmit={handleSubmit}>
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="name">Name</label>
         <input
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="text"
           maxLength="64"
           name="name"
@@ -113,32 +114,41 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
           required
         />
 
-        <label htmlFor="type">Type</label>
+        <label 
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          htmlFor="type">Type</label>
         <select
             name="type"
             value={objForm.type}
             onChange={handleChange}
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         >
             <option value=""></option>
             <option value="Figur">Figur</option>
             <option value="Waffe">Waffe</option>
         </select>
-
-        <label htmlFor="rating">Rating</label>
+        
+        <label
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          htmlFor="rating">Rating</label>
         <select
             name="rating"
             value={objForm.rating}
             onChange={handleChange}
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         >
             <option value="3">3 Star</option>
             <option value="4">4 Star</option>
             <option value="5">5 Star</option>
         </select>
-        <label htmlFor="element">Element</label>
+        <label
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          htmlFor="element">Element</label>
         <select
             name="element"
             value={objForm.element}
             onChange={handleChange}
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         >
             <option value=""></option>
             <option value="Anemo">Anemo</option>
@@ -150,12 +160,15 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
             <option value="Pyro">Pyro</option>
         </select>
 
-        <label htmlFor="wp_type">Weapon Type</label>
+        <label
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          htmlFor="wp_type">Weapon Type</label>
 
         <select
             name="wp_type"
             value={objForm.wp_type}
             onChange={handleChange}
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         >
             <option value=""></option>
             <option value="Einhand">Einhand</option>
@@ -165,26 +178,33 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
             <option value="Katalysator">Katalysator</option>
         </select>
 
-        <label htmlFor="obtained_from">Obtained from</label>
+        <label
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          htmlFor="obtained_from">Obtained from</label>
         <input
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="text"
           name="obtained_from"
           checked={objForm.obtained_from}
           onChange={handleChange}
         />
 
-        <label htmlFor="image_url">Image URL</label>
+        <label
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          htmlFor="image_url">Image URL</label>
         <input
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="url"
           name="image_url"
           value={objForm.image_url}
           onChange={handleChange}
         />
 
-        <button type="submit" className="btn">
-          Submit
+        <button class="shadow bg-black-500 hover:bg-black-400 focus:shadow-outline focus:outline-none text-white| font-bold py-2 px-4 rounded" type="submit">
+          Speichern
         </button>
       </form>
+      
       <p>{message}</p>
       <div>
         {Object.keys(errors).map((err, index) => (
