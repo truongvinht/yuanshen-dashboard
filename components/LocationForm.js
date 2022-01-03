@@ -15,6 +15,15 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
     image_url: locationForm.image_url
   })
 
+  // text fields
+  const [name, setName] = useState(locationForm.name)
+  const [image, setImage] = useState(locationForm.image_url)
+  
+  const objMap = {
+      'name':name,
+      'image_url':image
+  }
+
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (objForm) => {
     const { id } = router.query
@@ -70,8 +79,14 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
 
   const handleChange = (e) => {
     const target = e.target
-    const name = target.name
+    const key = target.name
 
+    if (key === 'Name') {
+      setName(target.value)
+    }
+    if (key === 'Link zum Bild') {
+      setImage(target.value)
+    }
     setObjForm({
       ...objForm,
       [name]: target.value,
@@ -105,8 +120,7 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
     name: 'Name',
     type: 'text',
     maxLength: '64',
-    value: objForm.name,
-    onChange: handleChange,
+    value: 'name',
     classType: 'text'
   })
 
@@ -115,8 +129,7 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
     required: false,
     name: 'Link zum Bild',
     type: 'text',
-    value: objForm.image_url,
-    onChange: handleChange,
+    value: 'image_url',
     classType: 'text'
   })
 
@@ -129,7 +142,7 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
   return (
     <>
     <Header headerTitle={headerString}/>
-    <EditForm formId={formId} handleSubmit={handleSubmit} components={compList}/>
+    <EditForm formId={formId} onChange={handleChange} handleSubmit={handleSubmit} components={compList}objForm={objMap}/>
     <p>{message}</p>
     <div>
       {Object.keys(errors).map((err, index) => (
