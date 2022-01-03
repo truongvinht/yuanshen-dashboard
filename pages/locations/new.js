@@ -1,12 +1,12 @@
-import LocationForm from '../components/LocationForm'
-import Login from '../components/Login'
+import LocationForm from '../../components/LocationForm'
+import Login from '../../components/Login'
 import nookies from 'nookies'
-import securityChecker from '../lib/securityChecker'
+import securityChecker from '../../lib/securityChecker'
 
 const NewLocation = ({hasReadPermission = false}) => {
   if (!hasReadPermission) {
     // return <div>Zugriff verweigert.</div>
-    return <Login redirectPath={'/newLocation'} />
+    return <Login redirectPath={'/locations/new'} />
   }
 
   const locationForm = {

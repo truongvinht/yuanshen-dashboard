@@ -1,12 +1,12 @@
-import ObjectForm from '../components/ObjectForm'
-import Login from '../components/Login'
+import ObjectForm from '../../components/ObjectForm'
+import Login from '../../components/Login'
 import nookies from 'nookies'
-import securityChecker from '../lib/securityChecker'
+import securityChecker from '../../lib/securityChecker'
 
 const NewObject = ({hasReadPermission = false}) => {
   if (!hasReadPermission) {
     // return <div>Zugriff verweigert.</div>
-    return <Login redirectPath={'/newObject'} />
+    return <Login redirectPath={'/objects/new'} />
   }
 
   const objectForm = {

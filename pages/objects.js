@@ -33,7 +33,7 @@ export async function getServerSideProps() {
   })
 
   // actions
-  let actions = [{'param_ref':'/newObject', 'param_as':'/newObject', 'param_title':'Neu', isEdit:true}];
+  let actions = [{'param_ref':'/objects/new', 'param_as':'/objects/new', 'param_title':'Neu', isEdit:true}];
 
   return { props: { pullObjects: pullObjects , actions: actions} }
 }

@@ -87,7 +87,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
       }
 
       // create next one
-      router.push('/newObject')
+      router.push('/objects/new')
       setMessage(`${objForm.name} created!`)
     } catch (error) {
       setMessage('Failed to add object')

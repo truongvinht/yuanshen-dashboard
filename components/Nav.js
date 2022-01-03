@@ -14,6 +14,9 @@ const Nav = () => {
                 <li>
                     <Link href='/locations'><a>Regionen</a></Link>
                 </li>
+                <li>
+                    <Link href='/elements'><a>Elemente</a></Link>
+                </li>
             </ul>
         </nav>
     );
