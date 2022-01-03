@@ -1,4 +1,4 @@
-const EditFormText = ({attribute_desc}) => {
+const EditFormText = ({attribute_desc, objForm, onChange}) => {
 
     if (attribute_desc.required) {
         return (
@@ -9,8 +9,8 @@ const EditFormText = ({attribute_desc}) => {
                 type="text"
                 maxLength={attribute_desc.maxLength}
                 name={attribute_desc.name}
-                value={attribute_desc.value}
-                onChange={attribute_desc.onChange}
+                value={objForm[attribute_desc.value]}
+                onChange={onChange}
                 required
                 />
             </div>
@@ -24,8 +24,8 @@ const EditFormText = ({attribute_desc}) => {
                 type="text"
                 maxLength={attribute_desc.maxLength}
                 name={attribute_desc.name}
-                value={attribute_desc.value}
-                onChange={attribute_desc.onChange}
+                value={objForm[attribute_desc.value]}
+                onChange={onChange}
                 />
             </div>
         )

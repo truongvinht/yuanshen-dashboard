@@ -15,9 +15,31 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     type: objectForm.type,
     rating: objectForm.rating,
     element: objectForm.element,
+    obtained_from: objectForm.obtained_from,
     wp_type: objectForm.wp_type,
     image_url: objectForm.image_url
   })
+
+  // text fields
+  const [name, setName] = useState(objectForm.name)
+  const [from, setFrom] = useState(objectForm.obtained_from)
+  const [image, setImage] = useState(objectForm.image_url)
+
+  // enum fields
+  const [type, setType] = useState(objectForm.type)
+  const [rating, setRating] = useState(objectForm.rating)
+  const [element, setElement] = useState(objectForm.element)
+  const [wpType, setWpType] = useState(objectForm.wp_type)
+
+  const objMap = {
+    'name':name,
+    'type':type,
+    'rating':rating,
+    'element':element,
+    'obtained_from':from,
+    'wp_type':wpType,
+    'image_url':image
+  }
 
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (objForm) => {
@@ -74,11 +96,32 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
 
   const handleChange = (e) => {
     const target = e.target
-    const name = target.name
+    const key = target.name
 
+    if (key === 'Name') {
+      setName(target.value)
+    }
+    if (key === 'Typ') {
+      setType(target.value)
+    }
+    if (key === 'Rarität') {
+      setRating(target.value)
+    }
+    if (key === 'Element') {
+      setElement(target.value)
+    }
+    if (key === 'Waffentyp') {
+      setWpType(target.value)
+    }
+    if (key === 'Erhalten durch') {
+      setFrom(target.value)
+    }
+    if (key === 'Link zum Bild') {
+      setImage(target.value)
+    }
     setObjForm({
       ...objForm,
-      [name]: target.value,
+      [key]: target.value,
     })
   }
 
@@ -102,7 +145,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     return err
   }
 
-  let headerString = 'Object anlegen';
+  let headerString = 'Objekt anlegen';
 
   if(!forNewObject) {
     headerString = 'Objekt bearbeiten'
@@ -118,16 +161,14 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     name: 'Name',
     type: 'text',
     maxLength: '64',
-    value: objForm.name,
-    onChange: handleChange,
+    value: 'name',
     classType: 'text'
   })
 
   // type
   compList.push({
     name: 'Typ',
-    value: objForm.type,
-    onChange: handleChange,
+    value: 'type',
     classType: 'enum',
     options: [
       {value: '', text: ''},
@@ -139,8 +180,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
   // Rating
   compList.push({
     name: 'Rarität',
-    value: objForm.rating,
-    onChange: handleChange,
+    value: 'rating',
     classType: 'enum',
     options: [
       {value: '3', text: '3 Sterne'},
@@ -152,8 +192,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
   // Element
   compList.push({
     name: 'Element',
-    value: objForm.element,
-    onChange: handleChange,
+    value: 'element',
     classType: 'enum',
     options: [
       {value: '', text: ''},
@@ -169,8 +208,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
   // Weapon Type
   compList.push({
     name: 'Waffentyp',
-    value: objForm.wp_type,
-    onChange: handleChange,
+    value: 'wp_type',
     classType: 'enum',
     options: [
       {value: '', text: ''},
@@ -187,8 +225,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     required: false,
     name: 'Erhalten durch',
     type: 'text',
-    value: objForm.obtained_from,
-    onChange: handleChange,
+    value: 'obtained_from',
     classType: 'text'
   })
 
@@ -197,15 +234,14 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     required: false,
     name: 'Link zum Bild',
     type: 'text',
-    value: objForm.image_url,
-    onChange: handleChange,
+    value: 'image_url',
     classType: 'text'
   })
 
   return (
     <>
       <Header headerTitle={headerString}/>
-      <EditForm formId={formId} handleSubmit={handleSubmit} components={compList}/>
+      <EditForm formId={formId} onChange={handleChange} handleSubmit={handleSubmit} components={compList} objForm={objMap}/>
       <p>{message}</p>
       <div>
         {Object.keys(errors).map((err, index) => (
@@ -217,3 +253,5 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
 }
 
 export default ObjectForm
+
+
