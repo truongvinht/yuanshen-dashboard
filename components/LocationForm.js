@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
+import Header from './Header'
+import EditForm from './EditForm'
 
 const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
   const router = useRouter()
@@ -93,38 +95,48 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
     return err
   }
 
+
+  // prepare meta for form
+  let compList = [];
+
+  // name
+  compList.push({
+    required: true,
+    name: 'Name',
+    type: 'text',
+    maxLength: '64',
+    value: objForm.name,
+    onChange: handleChange,
+    classType: 'text'
+  })
+
+  // image
+  compList.push({
+    required: false,
+    name: 'Link zum Bild',
+    type: 'text',
+    value: objForm.image_url,
+    onChange: handleChange,
+    classType: 'text'
+  })
+
+  let headerString = 'Region anlegen';
+
+  if(!forNewObject) {
+    headerString = 'Region bearbeiten'
+  }
+
   return (
     <>
-      <form id={formId} onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          maxLength="64"
-          name="name"
-          value={objForm.name}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="image_url">Image URL</label>
-        <input
-          type="url"
-          name="image_url"
-          value={objForm.image_url}
-          onChange={handleChange}
-        />
-
-        <button type="submit" className="btn">
-          Submit
-        </button>
-      </form>
-      <p>{message}</p>
-      <div>
-        {Object.keys(errors).map((err, index) => (
-          <li key={index}>{err}</li>
-        ))}
-      </div>
-    </>
+    <Header headerTitle={headerString}/>
+    <EditForm formId={formId} handleSubmit={handleSubmit} components={compList}/>
+    <p>{message}</p>
+    <div>
+      {Object.keys(errors).map((err, index) => (
+        <li key={index}>{err}</li>
+      ))}
+    </div>
+  </>
   )
 }
 

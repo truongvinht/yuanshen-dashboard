@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
+import Header from './Header'
+import EditForm from './EditForm'
 
 const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
   const router = useRouter()
@@ -100,111 +102,110 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     return err
   }
 
+  let headerString = 'Object anlegen';
+
+  if(!forNewObject) {
+    headerString = 'Objekt bearbeiten'
+  }
+
+
+  // prepare meta for form
+  let compList = [];
+
+  // name
+  compList.push({
+    required: true,
+    name: 'Name',
+    type: 'text',
+    maxLength: '64',
+    value: objForm.name,
+    onChange: handleChange,
+    classType: 'text'
+  })
+
+  // type
+  compList.push({
+    name: 'Typ',
+    value: objForm.type,
+    onChange: handleChange,
+    classType: 'enum',
+    options: [
+      {value: '', text: ''},
+      {value: 'Figur', text: 'Figur'},
+      {value: 'Waffe', text: 'Waffe'}
+    ]
+  })
+
+  // Rating
+  compList.push({
+    name: 'Rarität',
+    value: objForm.rating,
+    onChange: handleChange,
+    classType: 'enum',
+    options: [
+      {value: '3', text: '3 Sterne'},
+      {value: '4', text: '4 Sterne'},
+      {value: '5', text: '5 Sterne'}
+    ]
+  })
+
+  // Element
+  compList.push({
+    name: 'Element',
+    value: objForm.element,
+    onChange: handleChange,
+    classType: 'enum',
+    options: [
+      {value: '', text: ''},
+      {value: 'Anemo', text: 'Anemo'},
+      {value: 'Dendro', text: 'Dendro'},
+      {value: 'Elektro', text: 'Elektro'},
+      {value: 'Geo', text: 'Geo'},
+      {value: 'Hydro', text: 'Hydro'},
+      {value: 'Pyro', text: 'Pyro'}
+    ]
+  })
+
+  // Weapon Type
+  compList.push({
+    name: 'Waffentyp',
+    value: objForm.wp_type,
+    onChange: handleChange,
+    classType: 'enum',
+    options: [
+      {value: '', text: ''},
+      {value: 'Einhand', text: 'Einhand'},
+      {value: 'Zweihand', text: 'Zweihand'},
+      {value: 'Stange', text: 'Stange'},
+      {value: 'Bogen', text: 'Bogen'},
+      {value: 'Katalysator', text: 'Katalysator'}
+    ]
+  })
+
+  // obtained
+  compList.push({
+    required: false,
+    name: 'Erhalten durch',
+    type: 'text',
+    value: objForm.obtained_from,
+    onChange: handleChange,
+    classType: 'text'
+  })
+
+  // image
+  compList.push({
+    required: false,
+    name: 'Link zum Bild',
+    type: 'text',
+    value: objForm.image_url,
+    onChange: handleChange,
+    classType: 'text'
+  })
+
   return (
     <>
-      <form class="w-full max-w-lg" id={formId} onSubmit={handleSubmit}>
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="name">Name</label>
-        <input
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          type="text"
-          maxLength="64"
-          name="name"
-          value={objForm.name}
-          onChange={handleChange}
-          required
-        />
-
-        <label 
-          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          htmlFor="type">Type</label>
-        <select
-            name="type"
-            value={objForm.type}
-            onChange={handleChange}
-            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        >
-            <option value=""></option>
-            <option value="Figur">Figur</option>
-            <option value="Waffe">Waffe</option>
-        </select>
-        
-        <label
-          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          htmlFor="rating">Rating</label>
-        <select
-            name="rating"
-            value={objForm.rating}
-            onChange={handleChange}
-            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        >
-            <option value="3">3 Star</option>
-            <option value="4">4 Star</option>
-            <option value="5">5 Star</option>
-        </select>
-        <label
-          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          htmlFor="element">Element</label>
-        <select
-            name="element"
-            value={objForm.element}
-            onChange={handleChange}
-            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        >
-            <option value=""></option>
-            <option value="Anemo">Anemo</option>
-            <option value="Dendro">Dendro</option>
-            <option value="Elektro">Elektro</option>
-            <option value="Geo">Geo</option>
-            <option value="Hydro">Hydro</option>
-            <option value="Kryo">Kryo</option>
-            <option value="Pyro">Pyro</option>
-        </select>
-
-        <label
-          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          htmlFor="wp_type">Weapon Type</label>
-
-        <select
-            name="wp_type"
-            value={objForm.wp_type}
-            onChange={handleChange}
-            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        >
-            <option value=""></option>
-            <option value="Einhand">Einhand</option>
-            <option value="Zweihand">Zweihand</option>
-            <option value="Stange">Stange</option>
-            <option value="Bogen">Bogen</option>
-            <option value="Katalysator">Katalysator</option>
-        </select>
-
-        <label
-          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          htmlFor="obtained_from">Obtained from</label>
-        <input
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          type="text"
-          name="obtained_from"
-          checked={objForm.obtained_from}
-          onChange={handleChange}
-        />
-
-        <label
-          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          htmlFor="image_url">Image URL</label>
-        <input
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          type="url"
-          name="image_url"
-          value={objForm.image_url}
-          onChange={handleChange}
-        />
-
-        <button class="shadow bg-black-500 hover:bg-black-400 focus:shadow-outline focus:outline-none text-white| font-bold py-2 px-4 rounded" type="submit">
-          Speichern
-        </button>
-      </form>
-      
+      <Header headerTitle={headerString}/>
+      <EditForm formId={formId} handleSubmit={handleSubmit} components={compList}/>
       <p>{message}</p>
       <div>
         {Object.keys(errors).map((err, index) => (

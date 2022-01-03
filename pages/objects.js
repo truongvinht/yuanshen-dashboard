@@ -3,11 +3,14 @@ import PullObject from '../models/PullObject'
 import ObjectCard from '../components/ObjectCard'
 import objCardStyles from '../styles/ObjectCard.module.css'
 import Actionbar from '../components/Actionbar'
+import Header from '../components/Header'
 
 
 const pullObjects = ({ pullObjects, actions = {} }) => (
   <div>
     {/* Create a card for each pet */}
+      <Header headerTitle={"Objekte"}/>
+      <br />
     <Actionbar actions={actions} />
     <div className={objCardStyles.grid}>
       {pullObjects.map((obj) => (
