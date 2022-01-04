@@ -7,8 +7,13 @@
     "dev-alt": "next dev -p 3450",
     "build": "next build",
     "export": "next build && next export",
-    "start": "next start"
+    "start": "next start -p $PORT"
   },
+  "engines": {
+    "node": "12.x"
+  },
+  "author": "Vinh Tran",
+  "license": "MIT",
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@zeit/next-css": "^1.0.1",
