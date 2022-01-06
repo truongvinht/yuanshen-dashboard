@@ -201,6 +201,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
       {value: 'Elektro', text: 'Elektro'},
       {value: 'Geo', text: 'Geo'},
       {value: 'Hydro', text: 'Hydro'},
+      {value: 'Kryo', text: 'Kryo'},
       {value: 'Pyro', text: 'Pyro'}
     ]
   })

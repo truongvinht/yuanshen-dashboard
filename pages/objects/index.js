@@ -1,9 +1,9 @@
-import dbConnect from '../lib/dbConnect'
-import PullObject from '../models/PullObject'
-import ObjectCard from '../components/ObjectCard'
-import objCardStyles from '../styles/ObjectCard.module.css'
-import Actionbar from '../components/Actionbar'
-import Header from '../components/Header'
+import dbConnect from '../../lib/dbConnect'
+import PullObject from '../../models/PullObject'
+import ObjectCard from '../../components/ObjectCard'
+import objCardStyles from '../../styles/ObjectCard.module.css'
+import Actionbar from '../../components/Actionbar'
+import Header from '../../components/Header'
 
 
 const pullObjects = ({ pullObjects, actions = {} }) => (

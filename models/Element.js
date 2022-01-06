@@ -19,7 +19,6 @@ const ElementSchema = new mongoose.Schema({
   search_name: {
     /* search name*/
     type: String,
-    required: [true, 'Please provide a search name for Element.'],
   }
 })
 

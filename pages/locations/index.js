@@ -1,8 +1,7 @@
-
-import dbConnect from '../lib/dbConnect'
-import Location from '../models/Location'
+import dbConnect from '../../lib/dbConnect'
+import Location from '../../models/Location'
 // import Actionbar from '../components/Actionbar'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 
 //<Actionbar  actions={actions} />
 const Locations = ({locations, actions = {} }) => {
@@ -63,10 +62,9 @@ const Locations = ({locations, actions = {} }) => {
 };
 
 export async function getServerSideProps() {
-
+    
     // start db connection
     await dbConnect()
-
 
     /* find all the data in our database */
     const result = await Location.find({})
@@ -78,7 +76,7 @@ export async function getServerSideProps() {
     })
 
       // actions
-    let actions = [{'param_ref':'/newLocation', 'param_as':'/newLocation', 'param_title':'Neu', isEdit:true}];
+    let actions = [{'param_ref':'/locations/new', 'param_as':'/locations/new', 'param_title':'Neu', isEdit:true}];
 
     return { props: { locations: locations, actions: actions}  }
 }

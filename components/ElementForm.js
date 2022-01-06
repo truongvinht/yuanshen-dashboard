@@ -79,21 +79,17 @@ const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
       router.push('/elements/new')
       setMessage(`${objForm.name} created!`)
     } catch (error) {
-      setMessage('Failed to add object')
+      setMessage('Failed to add element')
     }
   }
 
   const handleChange = (e) => {
     const target = e.target
     const key = target.name
-
+    
     if (key === 'Name') {
       setName(target.value)
-      setSearch(target.value.toLowerCase())
-      setObjForm({
-        ...objForm,
-        ['search']: target.value.toLowerCase(),
-      })
+      //setSearch(name.toLowerCase())
     }
     if (key === 'Link zum Bild') {
       setImage(target.value)
@@ -103,13 +99,15 @@ const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
     }
     setObjForm({
       ...objForm,
-      [name]: target.value,
+      [key]: target.value,
     })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const errs = formValidate()
+    
+    // check for any occured error
     if (Object.keys(errs).length === 0) {
         forNewObject ? postData(objForm) : putData(objForm)
     } else {
@@ -120,7 +118,8 @@ const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
   /* Makes sure object info is filled for object name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {}
-    if (!objForm.name) err.name = 'Name is required'
+    if (!name) err.name = 'Name is required'
+    console.log(err)
     return err
   }
 
@@ -164,16 +163,16 @@ const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
   }
 
   return (
-    <>
-    <Header headerTitle={headerString}/>
-    <EditForm formId={formId} onChange={handleChange} handleSubmit={handleSubmit} components={compList}objForm={objMap}/>
+    <div>
+    <Header headerTitle={headerString} />
+    <EditForm formId={formId} onChange={handleChange} handleSubmit={handleSubmit} components={compList}objForm={objMap} />
     <p>{message}</p>
     <div>
       {Object.keys(errors).map((err, index) => (
         <li key={index}>{err}</li>
       ))}
     </div>
-  </>
+  </div>
   )
 }
 
