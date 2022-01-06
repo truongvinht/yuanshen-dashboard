@@ -17,7 +17,7 @@ const ObjectCard = ({obj, isEditing = false}) => {
         })
         router.push('/')
       } catch (error) {
-        setMessage('Failed to delete the obj.')
+        setMessage('Eintrag konnte nicht entfernt werden.')
       }
     }
     return (

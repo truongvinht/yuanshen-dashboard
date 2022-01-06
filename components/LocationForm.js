@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
-import Header from './Header'
+import EditHeader from './EditHeader'
 import EditForm from './EditForm'
 
 const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
@@ -83,14 +83,18 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
 
     if (key === 'Name') {
       setName(target.value)
+      setObjForm({
+        ...objForm,
+        ['name']: target.value,
+      })
     }
     if (key === 'Link zum Bild') {
       setImage(target.value)
+      setObjForm({
+        ...objForm,
+        ['image_url']: target.value,
+      })
     }
-    setObjForm({
-      ...objForm,
-      [name]: target.value,
-    })
   }
 
   const handleSubmit = (e) => {
@@ -133,15 +137,11 @@ const LocationForm = ({ formId, locationForm, forNewObject = true }) => {
     classType: 'text'
   })
 
-  let headerString = 'Region anlegen';
-
-  if(!forNewObject) {
-    headerString = 'Region bearbeiten'
-  }
+  let headerString = 'Region';
 
   return (
     <>
-    <Header headerTitle={headerString}/>
+    <EditHeader headerTitle={headerString} isEditing={!forNewObject}/>
     <EditForm formId={formId} onChange={handleChange} handleSubmit={handleSubmit} components={compList}objForm={objMap}/>
     <p>{message}</p>
     <div>

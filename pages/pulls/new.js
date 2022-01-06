@@ -1,7 +1,6 @@
-import Link from 'next/link'
-import dbConnect from '../lib/dbConnect'
-import PullObject from '../models/PullObject'
-import SinglePullForm from '../components/SinglePullForm'
+import dbConnect from '../../lib/dbConnect'
+import PullObject from '../../models/PullObject'
+import SinglePullForm from '../../components/SinglePullForm'
 
 const NewSinglePull = ({ pullObjects }) => {
     const singlePullForm = {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
-import Header from './Header'
+import EditHeader from './EditHeader'
 import EditForm from './EditForm'
 
 const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
@@ -100,29 +100,53 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
 
     if (key === 'Name') {
       setName(target.value)
+      setObjForm({
+        ...objForm,
+        ['name']: target.value,
+      })
     }
     if (key === 'Typ') {
       setType(target.value)
+      setObjForm({
+        ...objForm,
+        ['type']: target.value,
+      })
     }
     if (key === 'Rarität') {
       setRating(target.value)
+      setObjForm({
+        ...objForm,
+        ['rating']: target.value,
+      })
     }
     if (key === 'Element') {
       setElement(target.value)
+      setObjForm({
+        ...objForm,
+        ['element']: target.value,
+      })
     }
     if (key === 'Waffentyp') {
       setWpType(target.value)
+      setObjForm({
+        ...objForm,
+        ['wp_type']: target.value,
+      })
     }
     if (key === 'Erhalten durch') {
       setFrom(target.value)
+      setObjForm({
+        ...objForm,
+        ['obtained_from']: target.value,
+      })
     }
     if (key === 'Link zum Bild') {
       setImage(target.value)
+      setObjForm({
+        ...objForm,
+        ['image_url']: target.value,
+      })
     }
-    setObjForm({
-      ...objForm,
-      [key]: target.value,
-    })
   }
 
   const handleSubmit = (e) => {
@@ -145,12 +169,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
     return err
   }
 
-  let headerString = 'Objekt anlegen';
-
-  if(!forNewObject) {
-    headerString = 'Objekt bearbeiten'
-  }
-
+  let headerString = 'Objekt';
 
   // prepare meta for form
   let compList = [];
@@ -241,7 +260,7 @@ const ObjectForm = ({ formId, objectForm, forNewObject = true }) => {
 
   return (
     <>
-      <Header headerTitle={headerString}/>
+      <EditHeader headerTitle={headerString} isEditing={!forNewObject}/>
       <EditForm formId={formId} onChange={handleChange} handleSubmit={handleSubmit} components={compList} objForm={objMap}/>
       <p>{message}</p>
       <div>

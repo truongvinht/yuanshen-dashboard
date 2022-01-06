@@ -18,6 +18,9 @@ const Elements = ({elements, actions = {} }) => {
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Name
                   </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Synergie
+                  </th>
                   <th scope="col" className="relative px-6 py-3">
                     <span className="sr-only">Edit</span>
                   </th>
@@ -40,6 +43,9 @@ const Elements = ({elements, actions = {} }) => {
                         </div>
                       </div>
                     </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">-</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href={`/locations/${obj._id}/edit`} className="text-indigo-600 hover:text-indigo-900">Ändern</a>
