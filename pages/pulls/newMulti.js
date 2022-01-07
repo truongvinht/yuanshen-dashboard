@@ -3,14 +3,7 @@ import PullObject from '../../models/PullObject'
 import PullForm from '../../components/PullForm'
 
 const NewMultiPull = ({ pullObjects }) => {
-    const singlePullForm = {
-        banner: '',
-        object_ref: '',
-        eventTime: new Date(),
-        uid: ''
-    }
-
-    return <PullForm formId="add-pull-form" pullObjects={pullObjects} isSinglePull={true} />
+    return <PullForm formId="add-pull-form" pullObjects={pullObjects} isSinglePull={false} />
 }
 
 export async function getServerSideProps() {

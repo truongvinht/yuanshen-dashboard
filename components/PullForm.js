@@ -22,14 +22,32 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
   const [banner, setBanner] = useState(objForm.banner)
   const [eventTime, setEventTime] = useState(objForm.eventTime)
   const [uid, setUid] = useState(objForm.uid)
-
-  const [pObj, setPObj] = useState([])
+  const [objectRef0, setObjectRef0] = useState('')
+  const [objectRef1, setObjectRef1] = useState('')
+  const [objectRef2, setObjectRef2] = useState('')
+  const [objectRef3, setObjectRef3] = useState('')
+  const [objectRef4, setObjectRef4] = useState('')
+  const [objectRef5, setObjectRef5] = useState('')
+  const [objectRef6, setObjectRef6] = useState('')
+  const [objectRef7, setObjectRef7] = useState('')
+  const [objectRef8, setObjectRef8] = useState('')
+  const [objectRef9, setObjectRef9] = useState('')
   
+
   const objMap = {
-      'eventTime':Date.now,
-      'object_ref':"",
-      'banner':"Standardgebete",
-      'uid':""
+      'eventTime':eventTime,
+      'object_ref_0':objectRef0,
+      'object_ref_1':objectRef1,
+      'object_ref_2':objectRef2,
+      'object_ref_3':objectRef3,
+      'object_ref_4':objectRef4,
+      'object_ref_5':objectRef5,
+      'object_ref_6':objectRef6,
+      'object_ref_7':objectRef7,
+      'object_ref_8':objectRef8,
+      'object_ref_9':objectRef9,
+      'banner':banner,
+      'uid':uid
   }
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -61,21 +79,25 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
   }
 
   /* The POST method adds a new entry in the mongodb database. */
-  const postData = async (objForm) => {
+  const postData = async (objList) => {
     try {
-      const res = await fetch('/api/pulls', {
-        method: 'POST',
-        headers: {
-          Accept: contentType,
-          'Content-Type': contentType,
-        },
-        body: JSON.stringify(objForm),
-      })
 
-      // Throw error with status code in case Fetch API req failed
-      if (!res.ok) {
-        throw new Error(res.status)
+      for (let objForm in objList) {
+        const res = await fetch('/api/pulls', {
+          method: 'POST',
+          headers: {
+            Accept: contentType,
+            'Content-Type': contentType,
+          },
+          body: JSON.stringify(objForm),
+        })
+  
+        // Throw error with status code in case Fetch API req failed
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
       }
+
 
       // create next one
       router.push('/objects')
@@ -88,28 +110,79 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
   const handleChange = (e) => {
     const target = e.target
     const key = target.name
-
-    if (key === 'Name') {
-      setName(target.value)
+    
+    if (key === 'Banner') {
+      setBanner(target.value)
       setObjForm({
         ...objForm,
-        ['name']: target.value,
+        ['banner']: target.value,
       })
     }
-    if (key === 'Link zum Bild') {
-      setImage(target.value)
+    
+    if (key === 'Zeit') {
+      setEventTime(target.value)
       setObjForm({
         ...objForm,
-        ['image_url']: target.value,
+        ['eventTime']: target.value,
       })
+    }
+    
+    if (key === 'UID') {
+      setUid(target.value)
+      setObjForm({
+        ...objForm,
+        ['uid']: target.value,
+      })
+    }
+    
+    // check all pulls
+    if (key === '1. Ziehung') {
+      setObjectRef0(target.value)
+    }
+    if (key === '2. Ziehung') {
+      setObjectRef1(target.value)
+    }
+    if (key === '3. Ziehung') {
+      setObjectRef2(target.value)
+    }
+    if (key === '4. Ziehung') {
+      setObjectRef3(target.value)
+    }
+    if (key === '5. Ziehung') {
+      setObjectRef4(target.value)
+    }
+    if (key === '6. Ziehung') {
+      setObjectRef5(target.value)
+    }
+    if (key === '7. Ziehung') {
+      setObjectRef6(target.value)
+    }
+    if (key === '8. Ziehung') {
+      setObjectRef7(target.value)
+    }
+    if (key === '9. Ziehung') {
+      setObjectRef8(target.value)
+    }
+    if (key === '10. Ziehung') {
+      setObjectRef9(target.value)
     }
   }
-
+  /*forNewObject ? postData(objForm) : putData(objForm)*/
   const handleSubmit = (e) => {
     e.preventDefault()
     const errs = formValidate()
     if (Object.keys(errs).length === 0) {
-        forNewObject ? postData(objForm) : putData(objForm)
+        
+      if (isSinglePull) {
+        postData([{
+          ...objForm,
+          ['object_ref']: objectRef0,
+          ['order_index']:0
+        }])
+      } else {
+
+      }
+        
     } else {
       setErrors({ errs })
     }
@@ -118,7 +191,20 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
   /* Makes sure object info is filled for object name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {}
-    if (!objForm.name) err.name = 'Name is required'
+    if (!banner) err.banner = 'Banner is required'
+    if (!uid) err.uid = 'UID is required'
+    if (!objectRef0) err.objectRef0 = 'First pull is required'
+    if(!isSinglePull) {
+      if (!objectRef1) err.objectRef1 = '2nd pull is required'
+      if (!objectRef2) err.objectRef2 = '3rd pull is required'
+      if (!objectRef3) err.objectRef3 = '4th pull is required'
+      if (!objectRef4) err.objectRef4 = '5th pull is required'
+      if (!objectRef5) err.objectRef5 = '6th pull is required'
+      if (!objectRef6) err.objectRef6 = '7th pull is required'
+      if (!objectRef7) err.objectRef7 = '8th pull is required'
+      if (!objectRef8) err.objectRef8 = '9th pull is required'
+      if (!objectRef9) err.objectRef9 = '10th pull is required'
+    }
     return err
   }
 
@@ -139,7 +225,49 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
     ]
   })
 
+  // event time
+  compList.push({
+    required: true,
+    name: 'Zeit',
+    type: 'datetime-local',
+    value: 'eventTime',
+    classType: 'datetime-local'
+  })
+
+  // uid
+  compList.push({
+    required: true,
+    name: 'UID',
+    type: 'text',
+    maxLength: '32',
+    value: 'uid',
+    classType: 'text'
+  })
+
   let headerString = 'Ziehung';
+  let numPulls = 1;
+  if (!isSinglePull) {
+    // multi pull
+    numPulls = 10;
+    headerString = 'Ziehungen'
+  }
+
+  let options = [{'value':'','text':''}]
+  pullObjects.map((obj) => (
+    options.push({'value':obj._id, 'text':obj.name})
+  ))
+
+
+  for (let ind=0;ind < numPulls; ind = ind + 1) {
+
+    // Selection
+    compList.push({
+      name: `${ind+1}. Ziehung`,
+      value: `object_ref_${ind}`,
+      classType: 'enum',
+      options: options
+    })
+  }
 
   return (
     <>
