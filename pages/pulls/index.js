@@ -17,8 +17,7 @@ const pulls = ({pulls}) => {
 //router.push('/objects')
   const onSelectionChanged = () => {
     const selectedRows = gridApi.getSelectedRows();
-    console.log(selectedRows[0]._id)
-    
+    router.push(`/pulls/${selectedRows[0]._id}`)
   };
   return (
     <div>

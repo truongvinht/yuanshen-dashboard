@@ -4,7 +4,7 @@ import { mutate } from 'swr'
 import EditHeader from './EditHeader'
 import EditForm from './EditForm'
 
-const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
+const PullForm = ({ formId, pullObjects = [], isSinglePull = true}) => {
   const router = useRouter()
   const contentType = 'application/json'
   const [errors, setErrors] = useState({})
@@ -33,7 +33,6 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
   const [objectRef8, setObjectRef8] = useState('')
   const [objectRef9, setObjectRef9] = useState('')
   
-
   const objMap = {
       'eventTime':eventTime,
       'object_ref_0':objectRef0,
@@ -267,7 +266,7 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
     options.push({'value':obj._id, 'text':obj.name})
   ))
 
-
+  if (pull === null) {
   for (let ind=0;ind < numPulls; ind = ind + 1) {
 
     // Selection
@@ -277,6 +276,7 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
       classType: 'enum',
       options: options
     })
+  }
   }
 
   return (
