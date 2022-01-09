@@ -266,7 +266,6 @@ const PullForm = ({ formId, pullObjects = [], isSinglePull = true}) => {
     options.push({'value':obj._id, 'text':obj.name})
   ))
 
-  if (pull === null) {
   for (let ind=0;ind < numPulls; ind = ind + 1) {
 
     // Selection
@@ -276,7 +275,6 @@ const PullForm = ({ formId, pullObjects = [], isSinglePull = true}) => {
       classType: 'enum',
       options: options
     })
-  }
   }
 
   return (
