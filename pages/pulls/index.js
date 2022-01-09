@@ -5,9 +5,10 @@ import PullObject from '../../models/PullObject'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import Actionbar from '../../components/Actionbar'
 
 
-const pulls = ({pulls}) => {
+const pulls = ({pulls, actions = {}}) => {
   const router = useRouter()
   const [gridApi, setGridApi] = useState(null);
 
@@ -19,28 +20,50 @@ const pulls = ({pulls}) => {
     const selectedRows = gridApi.getSelectedRows();
     router.push(`/pulls/${selectedRows[0]._id}`)
   };
+
+
+
+  const dynamicCellStyle = params => {
+
+    console.log(params);
+    if (params.data.rating === '4') {
+        //mark police cells as red
+        return {color: 'purple','font-weight': 'bold', backgroundColor: 'AliceBlue'};
+    }else if (params.data.rating === '5') {
+        //mark police cells as red
+        return {color: 'orange', 'font-weight': 'bold',backgroundColor: 'AliceBlue'};
+    }
+    return {color: 'black', backgroundColor: 'white'};
+  };
+
   return (
     <div>
       <Head>
         <title>Yuanshen-Dashboard</title>
       </Head>
-      <h1>Überblick der Ziehungen</h1>
+      <h1>Überblick der Ziehungen ({pulls.length})</h1>
+      <Actionbar actions={actions} />
       <div className="ag-theme-alpine" style={{height: 400, width: 800}}>
           <AgGridReact
               rowData={pulls}
               rowSelection={'single'}
               onGridReady={onGridReady}
-              onSelectionChanged={onSelectionChanged}>
-              <AgGridColumn field="banner"></AgGridColumn>
-              <AgGridColumn headerName="Ziehung" field="object_ref"></AgGridColumn>
-              <AgGridColumn headerName="Zeit" field="eventTime"></AgGridColumn>
-              <AgGridColumn headerName="Index" maxWidth="80" field="order_index"></AgGridColumn>
-              <AgGridColumn headerName="UID" field="uid"></AgGridColumn>
+              onSelectionChanged={onSelectionChanged}
+              rowStyle={'black'}
+
+>
+              <AgGridColumn field="banner" cellStyle={dynamicCellStyle}></AgGridColumn>
+              <AgGridColumn headerName="Ziehung" field="object_ref" cellStyle={dynamicCellStyle}></AgGridColumn>
+              <AgGridColumn headerName="Zeit" field="eventTime" cellStyle={dynamicCellStyle}></AgGridColumn>
+              <AgGridColumn headerName="Index" maxWidth="80" field="order_index" cellStyle={dynamicCellStyle}></AgGridColumn>
+              <AgGridColumn headerName="UID" field="uid" cellStyle={dynamicCellStyle}></AgGridColumn>
+
           </AgGridReact>
       </div>
     </div>
   );
 };
+// <AgGridColumn headerName="Rarität" maxWidth="80" field="rating"></AgGridColumn>
 
 export async function getServerSideProps() {
 
@@ -57,13 +80,14 @@ export async function getServerSideProps() {
     /* find all the data in our database */
     const result = await Pull.find({}).sort([["eventTime", 1], ["index", 1]])
     const pulls = result.map((doc) => {
-        const pull = doc.toObject()
+        let pull = doc.toObject()
         
         pull._id = pull._id.toString()
 
         for (const pullObj of objects) {
           if (pullObj._id === pull.object_ref) {
             pull.object_ref = pullObj.name;
+            pull.rating = `${pullObj.rating}`;
           }
         }
 
@@ -71,7 +95,12 @@ export async function getServerSideProps() {
         return pull
     })
 
-    return { props: { pulls: pulls } }
+  // actions
+  let actions = [{'param_ref':'/pulls/new', 'param_as':'/pulls/new', 'param_title':'Single', isEdit:true},
+  {'param_ref':'/pulls/newMulti', 'param_as':'/pulls/newMulti', 'param_title':'Multi', isEdit:true}
+];
+
+    return { props: { pulls: pulls , actions: actions} }
 }
 
 export default pulls

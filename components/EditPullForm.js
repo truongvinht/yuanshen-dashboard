@@ -23,7 +23,7 @@ const EditPullForm = ({ formId, pull}) => {
       console.log("delete failed")
     }
   }
-  
+
   const [objForm, setObjForm] = useState({
     eventTime: pull.eventTime.toString().substring(0, 19),
     object_ref: pull.object_ref,
@@ -110,8 +110,6 @@ const EditPullForm = ({ formId, pull}) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const errs = formValidate()
-    const { id } = e.nativeEvent.submitter;
-    console.log(id);
 
     // check for any occured error
     if (Object.keys(errs).length === 0) {

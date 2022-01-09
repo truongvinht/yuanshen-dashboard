@@ -100,7 +100,7 @@ const PullForm = ({ formId, pullObjects = [], isSinglePull = true}) => {
 
 
       // create next one
-      router.push('/objects')
+      router.push('/pulls')
       setMessage(`Pull created!`)
     } catch (error) {
       setMessage('Failed to add pull')
