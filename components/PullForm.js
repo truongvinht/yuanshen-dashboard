@@ -82,7 +82,8 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
   const postData = async (objList) => {
     try {
 
-      for (let objForm in objList) {
+      for (let objForm of objList) {
+        console.log(objForm)
         const res = await fetch('/api/pulls', {
           method: 'POST',
           headers: {
@@ -180,7 +181,16 @@ const PullForm = ({ formId, pullObjects, isSinglePull = true }) => {
           ['order_index']:0
         }])
       } else {
+        let objList = []
+        for (let i=0;i<10;i = i + 1) {
+          objList.push({
+            ...objForm,
+            ['object_ref']:objMap[`object_ref_${i}`],
+            ['order_index']: i
+          })
+        }
 
+        postData(objList)
       }
         
     } else {

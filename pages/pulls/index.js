@@ -3,10 +3,23 @@ import dbConnect from '../../lib/dbConnect'
 import Pull from '../../models/Pull'
 import PullObject from '../../models/PullObject'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 
 const pulls = ({pulls}) => {
+  const router = useRouter()
+  const [gridApi, setGridApi] = useState(null);
 
+  const onGridReady = (params) => {
+    setGridApi(params.api);
+  };
+//router.push('/objects')
+  const onSelectionChanged = () => {
+    const selectedRows = gridApi.getSelectedRows();
+    console.log(selectedRows[0]._id)
+    
+  };
   return (
     <div>
       <Head>
@@ -15,11 +28,15 @@ const pulls = ({pulls}) => {
       <h1>Überblick der Ziehungen</h1>
       <div className="ag-theme-alpine" style={{height: 400, width: 800}}>
           <AgGridReact
-              rowData={pulls}>
+              rowData={pulls}
+              rowSelection={'single'}
+              onGridReady={onGridReady}
+              onSelectionChanged={onSelectionChanged}>
               <AgGridColumn field="banner"></AgGridColumn>
-              <AgGridColumn field="object_ref"></AgGridColumn>
-              <AgGridColumn field="eventTime"></AgGridColumn>
-              <AgGridColumn field="index"></AgGridColumn>
+              <AgGridColumn headerName="Ziehung" field="object_ref"></AgGridColumn>
+              <AgGridColumn headerName="Zeit" field="eventTime"></AgGridColumn>
+              <AgGridColumn headerName="Index" maxWidth="80" field="order_index"></AgGridColumn>
+              <AgGridColumn headerName="UID" field="uid"></AgGridColumn>
           </AgGridReact>
       </div>
     </div>
