@@ -1,10 +1,13 @@
 
 import EditFormItem from './EditFormItem'
 
-const EditForm = ({ formId, onChange, handleSubmit, handleDelete=null, objForm, components}) => {
+const EditForm = ({ formId, columns=1, onChange, handleSubmit, handleDelete=null, objForm, components}) => {
+    
+    const formClass = `w-full grid grid-cols-${columns} gap-3 max-w-lg`
+    
     return (
         <>    
-            <form className="w-full max-w-lg" id={formId} onSubmit={handleSubmit}>
+            <form className={formClass} id={formId} onSubmit={handleSubmit}>
                 {components.map((obj) => (
                     <EditFormItem attribute_desc={obj} objForm={objForm} onChange={onChange} />
                 ))}
@@ -19,3 +22,4 @@ const EditForm = ({ formId, onChange, handleSubmit, handleDelete=null, objForm, 
     )
 }
 export default EditForm
+{}

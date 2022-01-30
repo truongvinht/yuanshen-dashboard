@@ -280,7 +280,7 @@ const PullForm = ({ formId, pullObjects = [], isSinglePull = true}) => {
   return (
     <>
     <EditHeader headerTitle={headerString} isEditing={false}/>
-    <EditForm formId={formId} onChange={handleChange} handleSubmit={handleSubmit} components={compList}objForm={objMap}/>
+    <EditForm formId={formId} columns={2} onChange={handleChange} handleSubmit={handleSubmit} components={compList}objForm={objMap}/>
     <p>{message}</p>
     <div>
       {Object.keys(errors).map((err, index) => (
