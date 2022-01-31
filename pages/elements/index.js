@@ -3,8 +3,8 @@ import dbConnect from '../../lib/dbConnect'
 import Element from '../../models/Element'
 import Header from '../../components/Header'
 
-const Elements = ({elements, actions = {} }) => {
-
+const Elements = ({elements, actions = {}, error = false}) => {
+  
   return (
     <div>
       <Header headerTitle={"Elemente"}/>
@@ -73,7 +73,9 @@ export async function getServerSideProps() {
 
 
     /* find all the data in our database */
-    const result = await Element.find({})
+    const result = await Element.find({}).catch(err => {
+      return []
+    })
     const elements = result.map((doc) => {
         const loc = doc.toObject()
         
