@@ -91,9 +91,16 @@ if test $# -gt 0; then
     echo -e "    </div>" >> "$detailFile"
     echo -e "    );" >> "$detailFile"
     echo -e "};\n" >> "$detailFile"
-    echo -e "export default $editPageName\n" >> "$detailFile"
-    
 
+    echo -e "export async function getServerSideProps() {" >> "$detailFile"
+    echo -e "    // start db connection\n    await dbConnect()" >> "$detailFile"
+    echo -e "    /* find all the data in our database */" >> "$detailFile"
+    echo -e "    const result = await $model.find({}).catch(err => {" >> "$detailFile"
+    echo -e "    return []})" >> "$detailFile"
+    echo -e "    return { props: { }  }" >> "$detailFile"
+    echo -e "}\n" >> "$detailFile"
+
+    echo -e "export default $editPageName\n" >> "$detailFile"
 else
     echo "Missing passing model name!"
 fi

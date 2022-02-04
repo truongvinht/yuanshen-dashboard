@@ -6,14 +6,14 @@ const DungeonSchema = new mongoose.Schema({
         /* dungeon name*/
         type: String,
         unique: true,
-        required: [true, 'Please provide a name for Element.'],
+        required: [true, 'Please provide a name for Dungeon.'],
       },
       image_url: {
-        /* Url to element logo */
+        /* Url to dungeon logo */
         type: String,
       },
       synergy: {
-        /* element synergy*/
+        /* dungeon synergy*/
         type: String,
       },
       search_name: {
