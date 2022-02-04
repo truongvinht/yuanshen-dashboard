@@ -47,22 +47,53 @@ if test $# -gt 0; then
     mkdir "./pages/$apifolder"
     pageFile="./pages/$apifolder/index.js"
     touch "$pageFile"
+    pageName=$model
+    pageName+="Page"
 
     echo -e "import dbConnect from '../../lib/dbConnect'" >> "$pageFile"
     echo -e "import $model from '../../models/$model'" >> "$pageFile"
     echo -e "import Header from '../../components/Header'\n" >> "$pageFile"
-    echo -e "const $model = () => {" >> "$pageFile"
+    echo -e "const $pageName = () => {" >> "$pageFile"
     echo -e "    return (" >> "$pageFile"
     echo -e "    <div>" >> "$pageFile"
     echo -e "        <Header headerTitle={\"$model\"}/>" >> "$pageFile"
     echo -e "    </div>" >> "$pageFile"
     echo -e "    );" >> "$pageFile"
     echo -e "};\n" >> "$pageFile"
-    echo -e "export default $model\n" >> "$pageFile"
-
-
+    echo -e "export default $pageName\n" >> "$pageFile"
 
     # create page detail
+    mkdir "./pages/$apifolder/[id]"
+    detailFile="./pages/$apifolder/[id]/index.js"
+    touch "$detailFile"
+    editPageName="Edit"
+    editPageName+=$pageName
+
+    apiPath="/api/$apifolder/\${id}"
+
+    echo -e "import { useRouter } from 'next/router'" >> "$detailFile"
+    echo -e "import useSWR from 'swr'" >> "$detailFile"
+    echo -e "import Header from '../../components/Header'\n" >> "$detailFile"
+    echo -e "const fetcher = (url) =>" >> "$detailFile"
+    echo -e "  fetch(url)" >> "$detailFile"
+    echo -e "    .then((res) => res.json())" >> "$detailFile"
+    echo -e "    .then((json) => json.data)\n" >> "$detailFile"
+    
+    echo -e "const $editPageName = () => {" >> "$detailFile"
+    echo -e "    const router = useRouter()" >> "$detailFile"
+    echo -e "    const { id } = router.query" >> "$detailFile"
+    echo -e "    const { data: object, error } = useSWR(id ? \`$apiPath\` : null, fetcher)\n" >> "$detailFile"
+    echo -e "    if (error) return <p>Failed to load</p>" >> "$detailFile"
+    echo -e "    if (!object) return <p>Loading...</p>\n" >> "$detailFile"
+    echo -e "    return (" >> "$detailFile"
+    echo -e "    <div>" >> "$detailFile"
+    echo -e "        <Header headerTitle={\"$model\"}/>" >> "$detailFile"
+    echo -e "    </div>" >> "$detailFile"
+    echo -e "    );" >> "$detailFile"
+    echo -e "};\n" >> "$detailFile"
+    echo -e "export default $editPageName\n" >> "$detailFile"
+    
+
 else
     echo "Missing passing model name!"
 fi

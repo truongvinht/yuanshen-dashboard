@@ -2,7 +2,7 @@ import dbConnect from '../../lib/dbConnect'
 import Dungeon from '../../models/Dungeon'
 import Header from '../../components/Header'
 
-const Dungeon = () => {
+const DungeonPage = () => {
     return (
     <div>
         <Header headerTitle={"Dungeon"}/>
@@ -10,5 +10,5 @@ const Dungeon = () => {
     );
 };
 
-export default Dungeon
+export default DungeonPage
 
