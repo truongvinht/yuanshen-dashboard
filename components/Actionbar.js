@@ -3,8 +3,8 @@ import styles from '../styles/Actionbar.module.css'
 
 const Actionbar = ({ actions }) => {
 
-  if (actions.length === 0) {
-    return (<div></div>)
+  if (actions == null || actions.length === 0) {
+    return (<div></div>);
   } else {
     return (
       <div className={styles.btn_container}>

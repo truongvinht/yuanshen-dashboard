@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import LocationForm from '../../../components/LocationForm'
+import ElementForm from '../../../components/ElementForm'
 
 const fetcher = (url) =>
   fetch(url)
@@ -10,19 +10,19 @@ const fetcher = (url) =>
 const EditElement = () => {
   const router = useRouter()
   const { id } = router.query
-  const { data: locationObject, error } = useSWR(id ? `/api/locations/${id}` : null, fetcher)
+  const { data: elementObject, error } = useSWR(id ? `/api/elements/${id}` : null, fetcher)
 
   if (error) return <p>Failed to load</p>
-  if (!locationObject) return <p>Loading...</p>
+  if (!elementObject) return <p>Loading...</p>
 
-
-
-  const locationForm = {
-    name: locationObject.name,
-    image_url: locationObject.image_url
+  const elementForm = {
+    name: elementObject.name,
+    image_url: elementObject.image_url,
+    synergy: elementObject.synergy,
+    search_name: elementObject.search_name,
   }
 
-  return <LocationForm formId="edit-location-form" locationForm={locationForm} forNewObject={false}/>
+  return <ElementForm formId="edit-element-form" elementForm={elementForm} forNewObject={false}/>
 }
 
 export default EditElement

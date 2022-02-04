@@ -45,10 +45,10 @@ const Elements = ({elements, actions = {}, error = false}) => {
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">-</div>
+                    <div class="text-sm break-all whitespace-normal text-gray-900">{obj.synergy}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href={`/locations/${obj._id}/edit`} className="text-indigo-600 hover:text-indigo-900">Ändern</a>
+                    <a href={`/elements/${obj._id}/`} className="text-indigo-600 hover:text-indigo-900">Ändern</a>
                   </td>
                 </tr>
                 ))}
