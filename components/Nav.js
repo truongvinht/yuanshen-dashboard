@@ -17,6 +17,9 @@ const Nav = () => {
                 <li>
                     <Link href='/elements'><a>Elemente</a></Link>
                 </li>
+                <li>
+                    <Link href='/dungeons'><a>Spähre</a></Link>
+                </li>
             </ul>
         </nav>
     );

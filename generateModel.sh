@@ -73,7 +73,7 @@ if test $# -gt 0; then
 
     echo -e "import { useRouter } from 'next/router'" >> "$detailFile"
     echo -e "import useSWR from 'swr'" >> "$detailFile"
-    echo -e "import Header from '../../components/Header'\n" >> "$detailFile"
+    echo -e "import Header from '../../../components/Header'\n" >> "$detailFile"
     echo -e "const fetcher = (url) =>" >> "$detailFile"
     echo -e "  fetch(url)" >> "$detailFile"
     echo -e "    .then((res) => res.json())" >> "$detailFile"
