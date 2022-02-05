@@ -21,9 +21,6 @@ const Elements = ({elements, actions = {}, error = false}) => {
                   <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Synergie
                   </th>
-                  <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -38,17 +35,11 @@ const Elements = ({elements, actions = {}, error = false}) => {
                         <div className="text-sm font-medium text-gray-900">
                           {obj.name}
                         </div>
-                        <div className="text-sm text-gray-500">
-                          {obj._id}
-                        </div>
                       </div>
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="text-sm break-all whitespace-normal text-gray-900">{obj.synergy}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href={`/elements/${obj._id}/`} className="text-indigo-600 hover:text-indigo-900">Ändern</a>
                   </td>
                 </tr>
                 ))}
