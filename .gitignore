@@ -109,3 +109,4 @@ package-lock.json
 .env.local
 .DS_Store
 
+tools/generated
