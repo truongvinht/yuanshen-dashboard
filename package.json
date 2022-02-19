@@ -20,6 +20,7 @@
     "ag-grid-community": "^26.2.0",
     "ag-grid-react": "^26.2.0",
     "autoprefixer": "^9.8.8",
+    "generate-template-files": "^3.2.0",
     "mongoose": "6.1.4",
     "next": "9.3.5",
     "nookies": "^2.5.2",
