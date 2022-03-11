@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { mutate } from 'swr'
 import EditHeader from './EditHeader'
 import EditForm from './EditForm'
+import {createData, updateData} from './../lib/apiEndpointWrapper'
 
 const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
+
   const router = useRouter()
-  const contentType = 'application/json'
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
 
@@ -26,59 +26,6 @@ const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
       'name':name,
       'image_url':image,
       'synergy':synergy,
-  }
-
-  /* The PUT method edits an existing entry in the mongodb database. */
-  const putData = async (objForm) => {
-    const { id } = router.query
-
-    try {
-      const res = await fetch(`/api/elements/${id}`, {
-        method: 'PUT',
-        headers: {
-          Accept: contentType,
-          'Content-Type': contentType,
-        },
-        body: JSON.stringify(objForm),
-      })
-
-      // Throw error with status code in case Fetch API req failed
-      if (!res.ok) {
-        throw new Error(res.status)
-      }
-
-      const { data } = await res.json()
-
-      mutate(`/api/elements/${id}`, data, false) // Update the local data without a revalidation
-      router.push('/elements')
-    } catch (error) {
-      setMessage('Failed to update element')
-    }
-  }
-
-  /* The POST method adds a new entry in the mongodb database. */
-  const postData = async (objForm) => {
-    try {
-      const res = await fetch('/api/elements', {
-        method: 'POST',
-        headers: {
-          Accept: contentType,
-          'Content-Type': contentType,
-        },
-        body: JSON.stringify(objForm),
-      })
-
-      // Throw error with status code in case Fetch API req failed
-      if (!res.ok) {
-        throw new Error(res.status)
-      }
-
-      // create next one
-      router.push('/elements/new')
-      setMessage(`${objForm.name} created!`)
-    } catch (error) {
-      setMessage('Failed to add element')
-    }
   }
 
   const handleChange = (e) => {
@@ -112,10 +59,23 @@ const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const errs = formValidate()
+    const { id } = router.query
     
+    const callback = function (requestType, apiPath, object, error) {
+      if (error !== null) {
+        setMessage(`Failed operation [${requestType}]: ${object} - ${error}`)
+      } else {
+        if (requestType === 'POST') {
+          router.push('/elements/new')
+        } else if(requestType === 'PUT') {
+          router.push('/elements')
+        } 
+      }
+    };
+
     // check for any occured error
     if (Object.keys(errs).length === 0) {
-        forNewObject ? postData(objForm) : putData(objForm)
+        forNewObject ? createData('/api/elements',objForm, callback) : updateData(id,'/api/elements',objForm,callback)
     } else {
       setErrors({ errs })
     }

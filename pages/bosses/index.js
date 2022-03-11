@@ -1,14 +1,14 @@
 
 import dbConnect from '../../lib/dbConnect'
-import Element from '../../models/Element'
+import Boss from '../../models/Boss'
 import Header from '../../components/Header'
 import SimpleTable from '../../components/SimpleTable'
 
-const Elements = ({elements, error = false}) => {
+const Elements = ({elements, actions = {}, error = false}) => {
   
   return (
     <div>
-      <Header headerTitle={"Elemente"}/>
+      <Header headerTitle={"Boss"}/>
       <SimpleTable rowObjects={elements}></SimpleTable>
     </div>
   );
@@ -21,7 +21,7 @@ export async function getServerSideProps() {
 
 
     /* find all the data in our database */
-    const result = await Element.find({}).catch(err => {
+    const result = await Boss.find({}).catch(err => {
       return []
     })
     const elements = result.map((doc) => {
@@ -31,7 +31,11 @@ export async function getServerSideProps() {
         el.description = el.synergy
         return el
     })
-    return { props: { elements: elements}  }
+
+      // actions
+    let actions = [{'param_ref':'/newBoss', 'param_as':'/newBoss', 'param_title':'Neu', isEdit:true}];
+
+    return { props: { elements: elements, actions: actions}  }
 }
 
 export default Elements
