@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import EditHeader from './EditHeader'
 import EditForm from './EditForm'
-import {createData, updateData} from './../lib/apiEndpointWrapper'
+import {postData, putData} from './../lib/apiEndpointWrapper'
 
 const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
 
@@ -75,7 +75,7 @@ const ElementForm = ({ formId, elementForm, forNewObject = true }) => {
 
     // check for any occured error
     if (Object.keys(errs).length === 0) {
-        forNewObject ? createData('/api/elements',objForm, callback) : updateData(id,'/api/elements',objForm,callback)
+        forNewObject ? postData('/api/elements',objForm, callback) : putData(id,'/api/elements',objForm,callback)
     } else {
       setErrors({ errs })
     }
