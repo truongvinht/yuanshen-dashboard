@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev-alt": "next dev -p 3450",
+    "dev-debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "export": "next build && next export",
     "start": "next start -p $PORT",

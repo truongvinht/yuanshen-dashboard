@@ -108,5 +108,6 @@ package-lock.json
 # ignore
 .env.local
 .DS_Store
+.vscode
 
 tools/generated
