@@ -16,6 +16,9 @@ const SimpleTableRow = ({ entry }) => {
                 <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm break-all whitespace-normal text-gray-900">{entry.description}</div>
                 </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm break-all whitespace-normal text-gray-900">{entry._id}</div>
+                </td>
             </tr>
     );
 };

@@ -2,7 +2,7 @@
 import SimpleTableHeader from './SimpleTableHeader'
 import SimpleTableRow from './SimpleTableRow'
 
-const SimpleTable = ({ columnHeader = ["Name", "Description"], rowObjects }) => {
+const SimpleTable = ({ columnHeader = ["Name", "Description","id"], rowObjects }) => {
     return (
         <div>
             <div className="flex flex-col">
