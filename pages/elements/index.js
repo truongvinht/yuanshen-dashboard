@@ -2,14 +2,19 @@
 import dbConnect from '../../lib/dbConnect'
 import Element from '../../models/Element'
 import Header from '../../components/Header'
-import SimpleTable from '../../components/SimpleTable'
+import SimpleTable from '../../components/base/SimpleTable'
 
 const Elements = ({elements, error = false}) => {
+  
+  let header = {
+    "name": "Name",
+    "description": "Description"
+  };
   
   return (
     <div>
       <Header headerTitle={"Elemente"}/>
-      <SimpleTable rowObjects={elements}></SimpleTable>
+      <SimpleTable headerItems={header} rowObjects={elements}></SimpleTable>
     </div>
   );
 };

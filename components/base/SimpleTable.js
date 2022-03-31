@@ -1,8 +1,9 @@
 
 import SimpleTableHeader from './SimpleTableHeader'
-import SimpleTableRow from './SimpleTableRow'
+import SimpleTableRowSimple from './SimpleTableRowSimple'
+import SimpleTableRowSub from './SimpleTableRowSub'
 
-const SimpleTable = ({ columnHeader = ["Name", "Description","id"], rowObjects }) => {
+const SimpleTable = ({ headerItems, rowObjects, subtitleKey=undefined }) => {
     return (
         <div>
             <div className="flex flex-col">
@@ -12,14 +13,18 @@ const SimpleTable = ({ columnHeader = ["Name", "Description","id"], rowObjects }
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                    {columnHeader.map((header) => (
-                                        <SimpleTableHeader key={header.name} name={header}></SimpleTableHeader>
-                                        ))}
+                                    {
+                                        Object.keys(headerItems).map((mapK) => (
+                                            <SimpleTableHeader key={mapK} name={headerItems[mapK]} />
+                                        ))
+                                    }
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
                                     {rowObjects.map((obj) => (
-                                        <SimpleTableRow entry={obj}></SimpleTableRow>
+                                        subtitleKey===undefined?
+                                        <SimpleTableRowSimple key={obj._id} header={headerItems} entry={obj} />:
+                                        <SimpleTableRowSub key={obj._id} header={headerItems} entry={obj} subtitleKey={subtitleKey} />
                                     ))}
                                 </tbody>
                             </table>

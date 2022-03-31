@@ -19,11 +19,13 @@ const BossForm = ({ formId, bossForm, forNewObject = true }) => {
   // text fields
   const [name, setName] = useState(bossForm.name)
   const [description, setDescription] = useState(bossForm.description)
+  const [locationId, setLocationId] = useState(bossForm.location_id)
   const [image, setImage] = useState(bossForm.image_url)
   
   const objMap = {
       'name':name,
       'description':description,
+      'location_id':locationId,
       'image_url':image,
   }
 
@@ -76,7 +78,7 @@ const BossForm = ({ formId, bossForm, forNewObject = true }) => {
       router.push('/bosses/new')
       setMessage(`${objForm.name} created!`)
     } catch (error) {
-      setMessage('Failed to add boss')
+      setMessage('Failed to add boss ' + error)
     }
   }
 
@@ -97,6 +99,13 @@ const BossForm = ({ formId, bossForm, forNewObject = true }) => {
       setObjForm({
         ...objForm,
         ['description']: target.value,
+      })
+    }
+    if (key === 'Region') {
+      setLocationId(target.value)
+      setObjForm({
+        ...objForm,
+        ['location_id']: target.value,
       })
     }
     if (key === 'Link zum Bild') {
@@ -124,6 +133,7 @@ const BossForm = ({ formId, bossForm, forNewObject = true }) => {
   const formValidate = () => {
     let err = {}
     if (!name) err.name = 'Name is required'
+    if (!locationId) err.name = 'Location is required'
     console.log(err)
     return err
   }
@@ -149,6 +159,20 @@ const BossForm = ({ formId, bossForm, forNewObject = true }) => {
     maxLength: '64',
     value: 'description',
     classType: 'text'
+  })
+
+  // location
+  let options = [{'value':'','text':''}]
+  bossForm.locations.map((obj) => (
+    options.push({'value':obj._id, 'text':obj.name})
+  ))
+
+  // Selection
+  compList.push({
+    name: `Region`,
+    value: `location_id`,
+    classType: 'enum',
+    options: options
   })
 
   // image
