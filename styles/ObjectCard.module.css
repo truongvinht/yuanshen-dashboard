@@ -74,6 +74,16 @@
   object-fit: cover;
 }
 
+.custom_img50 {
+  width: 50% !important;
+  height: 50% !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+
+}
+
 .main_content {
   padding: 25px;
   position: absolute;
@@ -85,6 +95,38 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.5s all;
+}
+.artifact_title {
+  font-weight: bold;
+  font-size: 70%;
+}
+.artifact_description {
+  color: grey;
+  font-size: 60%;
+}
+
+.artifact_details {
+  position: absolute;
+  bottom: 10 !important;
+  width: 80%;
+}
+
+.domain_title {
+  color: white;
+  font-size: 60%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  text-shadow: 0px 0px 4px black;
+}
+
+.domain_img {
+  height: 40px !important;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 2px;
 }
 
 .element {

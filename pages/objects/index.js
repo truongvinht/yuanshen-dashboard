@@ -1,7 +1,7 @@
 import dbConnect from '../../lib/dbConnect'
 import PullObject from '../../models/PullObject'
-import ObjectCard from '../../components/ObjectCard'
-import objCardStyles from '../../styles/ObjectCard.module.css'
+import CardCollectionGrid from '../../components/base/CardCollectionGrid'
+import ObjectCard from '../../components/custom/ObjectCard'
 import Actionbar from '../../components/Actionbar'
 import Header from '../../components/Header'
 
@@ -12,11 +12,10 @@ const pullObjects = ({ pullObjects, actions = {} }) => (
       <Header headerTitle={"Objekte"}/>
       <br />
     <Actionbar actions={actions} />
-    <div className={objCardStyles.grid}>
-      {pullObjects.map((obj) => (
-        <ObjectCard obj={obj} />
-      ))}
-    </div>
+    <CardCollectionGrid cards={
+      pullObjects.map((obj) => (
+        <ObjectCard card={obj} />
+      ))} />
   </div>
 )
 

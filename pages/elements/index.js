@@ -8,7 +8,7 @@ const Elements = ({elements, error = false}) => {
   
   let header = {
     "name": "Name",
-    "description": "Description"
+    "description": "Beschreibung"
   };
   
   return (
